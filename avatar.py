@@ -17,15 +17,15 @@ pygame.draw.circle(area,(0,0,0),(225,eyes),raggio/5)
 pygame.draw.circle(area,(0,0,0),(295,eyes),raggio/5)
 pygame.display.update()
 time.sleep(1)
-"""
+
 for z in range(0,10):
     pygame.draw.line(area,(0,0,0),(200,328),(320,328))
     pygame.display.update()
-    time.sleep(0.5)
+    time.sleep(0.1)
     pygame.draw.line(area,(255,255,255),(200,328),(320,328))
     pygame.display.update()
-    time.sleep(0.5)
-"""
+    time.sleep(0.1)
+
 pygame.draw.line(area,(0,0,0),(50,500),(50,445))
 pygame.draw.line(area,(0,0,0),(150,500),(150,425))
 pygame.draw.line(area,(0,0,0),(50,445),(75,445))
