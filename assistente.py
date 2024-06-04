@@ -4,7 +4,7 @@ from speech_recognition import Recognizer, Microphone
 # Dizionario di insulti e risposte corrispondenti
 risposte_insulti = {
     "regolare": "Sei così imbarazzante che fai arrossire gli specchi.",
-    "stefano": "stefano, scaricati tik tok, altrimenti ti inculo",
+    "stefano": "stefano, ti vengo ad inculare con vadim",
     "dottore": "dottore, le vorrei sborrare in testa",
     "tomas":"tomas e gay",
     "yao":"yao vieni ora a casa mia sul leto",
