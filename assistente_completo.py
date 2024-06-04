@@ -15,6 +15,7 @@ eyes=250
 raggio=100
 raggiom=raggio
 rect=pygame.Rect((200,280), (raggio+20, raggiom))
+tempo=0
 
 # Dizionario di insulti e risposte corrispondenti
 risposte_insulti = {
@@ -53,7 +54,8 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
     text=list(text)
-    for i in range(0,int(len(text)/2)):
+    tempo=int(len(text)/2)
+    for i in range(0,tempo):
         pygame.draw.circle(area,(0,0,0),(260,face),raggio)
         pygame.draw.circle(area,(255,255,255),(260,face),(raggio-3))
         pygame.draw.arc(area, (0,0,0), rect, 3.14, 0)
@@ -66,6 +68,7 @@ def speak(text):
         pygame.draw.line(area,(255,255,255),(200,328),(320,328))
         pygame.display.update()
         time.sleep(0.1)
+    return tempo
 
 def identify_person(img, references):
     try:
@@ -134,6 +137,18 @@ def recognize_and_respond():
 
                         if risposta:
                             speak(risposta)
+                            time.sleep(tempo)
+                            pygame.draw.line(area,(0,0,0),(50,500),(50,445))
+                            pygame.draw.line(area,(0,0,0),(150,500),(150,425))
+                            pygame.draw.line(area,(0,0,0),(50,445),(75,445))
+                            pygame.draw.line(area,(0,0,0),(75,435),(100,435))
+                            pygame.draw.line(area,(0,0,0),(75,435),(75,445))
+                            pygame.draw.line(area,(0,0,0),(100,450),(100,350))
+                            pygame.draw.line(area,(0,0,0),(125,450),(125,350))
+                            pygame.draw.line(area,(0,0,0),(100,350),(125,350))
+                            pygame.draw.line(area,(0,0,0),(125,425),(150,425))
+                            pygame.display.update()
+                            time.sleep(2)
                         elif  "ciao giovanna" in testo:
                             ret, img = cap.read()
                             img = cv2.flip(img, 1)
@@ -157,5 +172,4 @@ def recognize_and_respond():
             speak("Errore nel riconoscimento vocale.")
             recognize_and_respond()
 
-# Avvia la funzione per gestire il riconoscimento vocale e la risposta agli insulti
 recognize_and_respond()
