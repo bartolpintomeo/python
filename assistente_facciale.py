@@ -3,7 +3,7 @@ from pyttsx3 import init
 from speech_recognition import Recognizer, Microphone
 import numpy as np
 from deepface import DeepFace
-import copy
+from copy import deepcopy
 
 # Dizionario di insulti e risposte corrispondenti
 risposte_insulti = {
