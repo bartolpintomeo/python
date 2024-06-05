@@ -5,6 +5,14 @@ import numpy as np
 from deepface import DeepFace
 import pygame
 import time
+from pandas import read_csv
+from sklearn.tree import DecisionTreeClassifier
+
+giocatori=read_csv("giocatori.csv")
+X=giocatori.drop(columns=["videogame"])
+y=giocatori["videogame"]
+modello=DecisionTreeClassifier()
+modello.fit(X.values, y.values)
 pygame.init()
 
 area=pygame.display.set_mode((500,500))
@@ -127,7 +135,24 @@ def recognize_and_respond():
                         audio = recognizer.listen(source)
                         testo = recognizer.recognize_google(audio, language="it-IT").lower()
                         print("Hai detto:", testo)
-                    
+
+                        if testo=="consigliami un gioco":
+                            speak("dimmi la tua età")
+                            eta=testo
+                            speak("dimmi, cosa hai nelle mutande?")
+                            sesso=testo
+                            try:
+                                if sesso=="maschio":
+                                    sesso=1
+                                elif sesso=="femmina":
+                                    sesso=0
+                                else:
+                                    speak("non ho capito")
+                                
+                                previsioni = modello.predict([[sesso, eta]])
+                                speak(previsioni)
+                            except ValueError:
+                                 speak("non ho capito")
                         # Controllo se c'è un insulto nel testo riconosciuto e risponde di conseguenza
                         risposta = None
                         for insulto, risposta_ in risposte_insulti.items():
