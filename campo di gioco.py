@@ -1,6 +1,5 @@
 import pygame
 import time
-import cv2
 pygame.init()
 
 def oscilla(variabile):
