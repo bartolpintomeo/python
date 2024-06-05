@@ -3,6 +3,14 @@
     {
       "domanda": "ciao",
       "risposta": "hola"
+    },
+    {
+      "domanda": "hola",
+      "risposta": "ciao"
+    },
+    {
+      "domanda": "come stai?",
+      "risposta": "sto bene grazie"
     }
   ]
 }

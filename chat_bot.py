@@ -14,8 +14,8 @@ def find_migliore_risposta(user_question: str, question :list[str]):
     return match[0] if match else None
 def get_prendi_la_risposta(question: str, conoscenze: dict):
     for q in conoscenze["domande"]:
-        if q["domande"] ==question:
-            return q["risposte"]
+        if q["domanda"] ==question:
+            return q["risposta"]
 def chat_bot():
     conoscenze: dict= load_conoscenze("conoscenze.json")
 
