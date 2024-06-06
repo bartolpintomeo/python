@@ -11,6 +11,26 @@
     {
       "domanda": "come stai?",
       "risposta": "sto bene grazie"
+    },
+    {
+      "domanda": "ciao",
+      "risposta": "ciao"
+    },
+    {
+      "domanda": "stai bene",
+      "risposta": "sto bene"
+    },
+    {
+      "domanda": "che giochi ti piacciono",
+      "risposta": "i giochi di combattimento"
+    },
+    {
+      "domanda": "cosa ti piace fare nei weekend",
+      "risposta": "mi piace andare al mare oppure fare delle feste"
+    },
+    {
+      "domanda": "ok bye",
+      "risposta": "ciao ciao"
     }
   ]
 }
