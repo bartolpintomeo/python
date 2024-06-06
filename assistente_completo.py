@@ -4,9 +4,11 @@ from speech_recognition import Recognizer, Microphone
 import numpy as np
 from deepface import DeepFace
 import pygame
-import time
 from pandas import read_csv
 from sklearn.tree import DecisionTreeClassifier
+import json
+from difflib import get_close_matches
+
 
 giocatori=read_csv("giocatori.csv")
 X=giocatori.drop(columns=["videogame"])
@@ -56,6 +58,27 @@ cap = cv2.VideoCapture(0)
 
 recognizer = Recognizer()
 
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+    text=list(text)
+
+def load_conoscenze(file_path: str):
+    with open(file_path, 'r') as file:
+        data: dict = json.load(file)
+    return data
+def save_conoscenza(file_path: str, data: dict):
+    with open(file_path, "w") as file:
+        json.dump(data, file, indent=2)
+    
+def find_migliore_risposta(user_question: str, question :list[str]): 
+    match: list = get_close_matches(user_question, question, n=1, cutoff=0.6)
+    return match[0] if match else None
+def get_prendi_la_risposta(question: str, conoscenze: dict):
+    for q in conoscenze["domande"]:
+        if q["domanda"] ==question:
+            return q["risposta"]
+        
 
 def speak(text):
     engine.say(text)
@@ -137,37 +160,70 @@ def recognize_and_respond():
                                 speak(previsioni)
                             except ValueError:
                                  speak("non ho capito")
-                        # Controllo se c'è un insulto nel testo riconosciuto e risponde di conseguenza
-                        risposta = None
-                        for insulto, risposta_ in risposte_insulti.items():
-                            if insulto in testo:
-                                risposta = risposta_
-                                break
 
-                        if risposta:
-                            speak(risposta)
+                        conoscenze: dict= load_conoscenze("conoscenze.json")
 
-                        elif  "ciao giovanna" in testo:
-                            ret, img = cap.read()
-                            img = cv2.flip(img, 1)
-                            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                            faces = faceCascade.detectMultiScale(
-                                gray,     
-                                scaleFactor=1.2,
-                                minNeighbors=5,     
-                                minSize=(20, 20)
-                            )
-                        else:
-                            speak("Non ho capito cosa hai detto.")
+                        while True:
+                            with Microphone() as source:
+                                print("Ascoltando...")
+                                speak("sto ascoltando")
+                                audio = recognizer.listen(source)
+                                user_input: str = audio
+                            
+                            migliore_risposta: str | None = find_migliore_risposta(user_input, [q["domanda"] for q in conoscenze["domande"]])
+
+                            if migliore_risposta:
+                                risposta: str  = get_prendi_la_risposta(migliore_risposta, conoscenze)
+                                speak(f"{risposta}")
+                            
+                            else:
+                                speak(" non conosco la risposta insegnami")
+                                speak("dammi una risposta pls opure deprimimi e scrivi 'skip': ")
+                                nuova_risposta: str = user_input
+
+                                if nuova_risposta.lower() != "skip":
+                                    conoscenze["domande"].append({"domanda": user_input, "risposta":nuova_risposta})  
                             
 
-            # Se non viene pronunciata l'attivazione, continua ad ascoltare
-            else:
-                recognize_and_respond()
+                                    save_conoscenza("conoscenze.json", conoscenze)
+                                    speak(" grazie puccio")
+
+
+                            if user_input.lower()=="esci" or risposta.lower()=="ciao ciao":
+                                break
+
+                            if user_input.lower()=="posso insegnarti qualcosa?":
+                                speak("si dimmi la domanda: ")
+                                nuova_domanda: str=user_input
+                                speak("dammi una risposta: ")
+                                nuova_risposta: str = user_input
+                                conoscenze["domande"].append({"domanda": nuova_domanda, "risposta":nuova_risposta})
+                                            
+
+                            if risposta:
+                                                speak(risposta)
+
+                            elif  "ciao giovanna" in testo:
+                                                ret, img = cap.read()
+                                                img = cv2.flip(img, 1)
+                                                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                                                faces = faceCascade.detectMultiScale(
+                                                    gray,     
+                                                    scaleFactor=1.2,
+                                                    minNeighbors=5,     
+                                                    minSize=(20, 20)
+                                                )
+                            else:
+                                 speak("Non ho capito cosa hai detto.")
+                                                
+
+                                # Se non viene pronunciata l'attivazione, continua ad ascoltare
+                        else:
+                            recognize_and_respond()
 
         except Exception as e:
-            print("Errore nel riconoscimento vocale:", e)
-            speak("Errore nel riconoscimento vocale.")
-            recognize_and_respond()
+                print("Errore nel riconoscimento vocale:", e
+                speak("Errore nel riconoscimento vocale.")
+                recognize_and_respond()
 
 recognize_and_respond()
