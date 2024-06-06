@@ -15,16 +15,7 @@ X=giocatori.drop(columns=["videogame"])
 y=giocatori["videogame"]
 modello=DecisionTreeClassifier()
 modello.fit(X.values, y.values)
-pygame.init()
 
-area=pygame.display.set_mode((500,500))
-i=0
-area.fill((255,255,255))
-face=300
-eyes=250
-raggio=100
-raggiom=raggio
-rect=pygame.Rect((200,280), (raggio+20, raggiom))
 
 # Inizializzazione del motore di text-to-speech
 engine = init()
