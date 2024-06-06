@@ -37,9 +37,6 @@ def chat_bot():
             speak("sto ascoltando")
             audio = recognizer.listen(source)
             user_input: str = audio
-
-        if user_input.lower()=="esci" or risposta.lower()=="ciao ciao":
-            break
         
         migliore_risposta: str | None = find_migliore_risposta(user_input, [q["domanda"] for q in conoscenze["domande"]])
 
@@ -60,6 +57,14 @@ def chat_bot():
                 speak(" grazie puccio")
 
 
-        
+        if user_input.lower()=="esci" or risposta.lower()=="ciao ciao":
+            break
+
+        if user_input.lower()=="posso insegnarti qualcosa?":
+            speak("si dimmi la domanda: ")
+            nuova_domanda: str=user_input
+            speak("dammi una risposta: ")
+            nuova_risposta: str = user_input
+            conoscenze["domande"].append({"domanda": nuova_domanda, "risposta":nuova_risposta})
 if __name__=="__main__":
     chat_bot()

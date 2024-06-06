@@ -48,7 +48,7 @@ def chat_bot():
         
         if user_input.lower()=="posso insegnarti qualcosa?":
             print("si dimmi la domanda: ")
-            nuova_risposta: str = input("dammi una risposta pls opure deprimimi e scrivi 'skip': ")
+            nuova_risposta: str = input("dammi una risposta: ")
             conoscenze["domande"].append({"domanda": user_input, "risposta":nuova_risposta})
 if __name__=="__main__":
     chat_bot()
