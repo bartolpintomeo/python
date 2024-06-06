@@ -23,15 +23,13 @@ def chat_bot():
     while True:
         user_input: str = input("you: ")
 
-        if user_input.lower()=="esci" or user_input.lower()=="bye":
-            break
+        
         
         migliore_risposta: str | None = find_migliore_risposta(user_input, [q["domanda"] for q in conoscenze["domande"]])
 
         if migliore_risposta:
             risposta: str  = get_prendi_la_risposta(migliore_risposta, conoscenze)
             print(f"bot: {risposta}")
-        
         else:
             print("Bot: non conosco la risposta insegnami")
             nuova_risposta: str = input("dammi una risposta pls opure deprimimi e scrivi 'skip': ") 
@@ -44,6 +42,10 @@ def chat_bot():
                 print("Bot: grazie puccio")
 
 
+        
+        if user_input.lower()=="esci" or risposta.lower()=="ciao ciao":
+            break
+        
         if user_input.lower()=="posso insegnarti qualcosa?":
             print("si dimmi la domanda: ")
             nuova_risposta: str = input("dammi una risposta pls opure deprimimi e scrivi 'skip': ")
