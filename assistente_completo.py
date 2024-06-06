@@ -26,21 +26,6 @@ raggio=100
 raggiom=raggio
 rect=pygame.Rect((200,280), (raggio+20, raggiom))
 
-# Dizionario di insulti e risposte corrispondenti
-risposte_insulti = {
-    "regolare": "Sei così imbarazzante che fai arrossire gli specchi.",
-    "stefano": "stefano, ti vengo ad inculare con Vadim",
-    "dottore": "dottore, le vorrei sborrare in testa",
-    "thomas":"tomas è gay",
-    "yao":"yao vieni ora a casa mia sul leto",
-    "tristana":"levati dalle palle",
-    "lux":"lux brucia",
-    "aurora":"guarda un cane",
-    "ale":"vieni su lol?",
-    "alem":"vieni ora su lol",
-    "prof":"prof ugo ha da crepà"    
-    }
-
 # Inizializzazione del motore di text-to-speech
 engine = init()
 engine.runAndWait()
