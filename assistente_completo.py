@@ -222,7 +222,7 @@ def recognize_and_respond():
                             recognize_and_respond()
 
         except Exception as e:
-                print("Errore nel riconoscimento vocale:", e
+                print("Errore nel riconoscimento vocale:", e)
                 speak("Errore nel riconoscimento vocale.")
                 recognize_and_respond()
 
