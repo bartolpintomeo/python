@@ -7,7 +7,7 @@ y=giocatori["videogame"]
 
 modello=DecisionTreeClassifier()
 modello.fit(X.values, y.values)
-sesso=input("il tuo sesso: ")
+sesso=input("il tuo sesso:  ")
 if sesso=="maschio":
     sesso=1
 if sesso=="femmina":
