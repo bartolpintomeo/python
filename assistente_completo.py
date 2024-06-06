@@ -75,7 +75,7 @@ def recognize_and_respond():
     with Microphone() as source:
         print("Ascoltando...")
         speak("sto ascoltando")
-        audio = recognizer.listen(source
+        audio = recognizer.listen(source)
 
         try:
             # Riconoscimento vocale utilizzando Google (senza configurazione delle credenziali)
