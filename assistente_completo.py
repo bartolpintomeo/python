@@ -3,7 +3,6 @@ from pyttsx3 import init
 from speech_recognition import Recognizer, Microphone
 import numpy as np
 from deepface import DeepFace
-import pygame
 from pandas import read_csv
 from sklearn.tree import DecisionTreeClassifier
 import json
