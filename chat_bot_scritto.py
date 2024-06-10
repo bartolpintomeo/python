@@ -22,6 +22,9 @@ def chat_bot():
 
     while True:
         user_input: str = input("you: ")
+        
+        if user_input.lower()=="esci":
+            break
 
         
         
@@ -43,7 +46,7 @@ def chat_bot():
 
 
         
-        if user_input.lower()=="esci" or risposta.lower()=="ciao ciao":
+        if user_input.lower()=="esci": #or risposta.lower()=="ciao ciao":
             break
         
         if user_input.lower()=="posso insegnarti qualcosa?":
