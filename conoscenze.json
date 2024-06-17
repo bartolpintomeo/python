@@ -315,6 +315,10 @@
     {
       "domanda": "america ya",
       "risposta": "hallo ya"
+    },
+    {
+      "domanda": "skip",
+      "risposta": "skup"
     }
   ]
 }

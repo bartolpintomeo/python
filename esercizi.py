@@ -104,3 +104,17 @@ def fibonacci():
         except ValueError:
             print("voglio un intero")
 fibonacci()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
